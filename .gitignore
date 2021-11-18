@@ -1,0 +1,8 @@
+myAdmin.*exe*
+static/uploads/*
+.idea/*
+*.exe
+main
+vendor/*
+go.sum
+lastupdate.tmp
