@@ -14,5 +14,11 @@ type GModel struct {
 }
 
 func Migrate() {
-	global.Db.AutoMigrate(&Database{})
+	global.Db.AutoMigrate(
+		&MysqlInstance{},
+		&MysqlUser{},
+		&MysqlDB{},
+	//&WorkflowNode{},
+	//&WorkflowThread{},
+	)
 }

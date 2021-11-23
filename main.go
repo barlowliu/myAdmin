@@ -18,7 +18,7 @@ func main() {
 	logs.SetLogFuncCall(true)
 
 	//init
-	global.DbInit()
+	global.MySQLInit()
 	models.Migrate()
 
 	//启动beego

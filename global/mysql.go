@@ -14,7 +14,8 @@ var (
 	Db         *gorm.DB
 )
 
-func DbInit() {
+func MySQLInit() {
+
 	DataSource = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s",
 		BA_CONFIG.Mysql.Username,
 		BA_CONFIG.Mysql.Password,
