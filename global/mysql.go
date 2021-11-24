@@ -16,7 +16,7 @@ var (
 
 func MySQLInit() {
 
-	DataSource = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s",
+	DataSource = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=True",
 		BA_CONFIG.Mysql.Username,
 		BA_CONFIG.Mysql.Password,
 		BA_CONFIG.Mysql.Host,
@@ -41,4 +41,23 @@ func MySQLInit() {
 	sqlDb.SetConnMaxLifetime(time.Minute * 10)
 	sqlDb.SetMaxOpenConns(100)
 	sqlDb.SetMaxIdleConns(15)
+}
+
+func NewDB(dsn string) (newDb *gorm.DB, err error) {
+	newDb, err = gorm.Open(mysql.New(mysql.Config{
+		DSN:                       dsn,   // DSN data source name
+		DefaultStringSize:         256,   // string 类型字段的默认长度
+		DisableDatetimePrecision:  true,  // 禁用 datetime 精度，MySQL 5.6 之前的数据库不支持
+		DontSupportRenameIndex:    true,  // 重命名索引时采用删除并新建的方式，MySQL 5.7 之前的数据库和 MariaDB 不支持重命名索引
+		DontSupportRenameColumn:   true,  // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
+		SkipInitializeWithVersion: false, // 根据当前 MySQL 版本自动配置
+	}), &gorm.Config{})
+	if err != nil {
+		return
+	}
+	sqlDb, _ := newDb.DB()
+	sqlDb.SetConnMaxLifetime(time.Minute * 5)
+	sqlDb.SetMaxOpenConns(3)
+	sqlDb.SetMaxIdleConns(2)
+	return
 }
