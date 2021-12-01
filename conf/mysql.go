@@ -7,4 +7,5 @@ type Mysql struct {
 	Database string `mapstructure:"database" json:"database" yaml:"database"`
 	Username string `mapstructure:"username" json:"username" yaml:"username"`
 	Password string `mapstructure:"password" json:"password" yaml:"password"`
+	Charset  string `mapstructure:"charset" json:"charset" yaml:"charset"`
 }

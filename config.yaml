@@ -12,6 +12,7 @@ mysql:
   database: 'myAdmin'
   username: 'myadmin'
   password: '123456'
+  Charset: 'utf8mb4'
 
 # other configuration
 other:
