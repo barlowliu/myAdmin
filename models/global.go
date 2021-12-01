@@ -18,7 +18,6 @@ func Migrate() {
 		&MysqlInstance{},
 		&MysqlUser{},
 		&MysqlDB{},
-	//&WorkflowNode{},
-	//&WorkflowThread{},
+		&MysqlGlobalVariable{},
 	)
 }
