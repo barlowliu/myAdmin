@@ -18,6 +18,19 @@ mysql:
 other:
   log_aes_key: 'AES256Key-32Characters1234567890'
 
+rsa:
+  public: '-----BEGIN PUBLIC KEY-----MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALkTAuxWGZJ+gpl9UdTmgJMoBnuyP6NxDl1XcLka18iOwd4A1IJ9NFJTnprHZbs2H+C8kVCRRsfPn74/FZRQqM0CAwEAAQ==-----END PUBLIC KEY-----'
+  private: '
+  -----BEGIN RSA PRIVATE KEY-----
+  MIIBOgIBAAJBALkTAuxWGZJ+gpl9UdTmgJMoBnuyP6NxDl1XcLka18iOwd4A1IJ9
+  NFJTnprHZbs2H+C8kVCRRsfPn74/FZRQqM0CAwEAAQJAc5Cug5sj7rj2nheF8LZa
+  VQlqOvVMDaf7+0ctiTh8w6tnArMJI7ZuR8lTYcAnqkrtT09yGmqajIliw3gDna2l
+  1QIhAPXWnyYJEW4Ef1/Le6CGMcrXPesEuMvP9ertCmWPrb6rAiEAwLlnk0uJ2hIN
+  c8UFVdqM3T8Daryxcf8msvEBMmAS1mcCIQDRDBU/MbzZkgeCPTU+Vn6m3wtu+w/t
+  eETE5ZbOsDPtiwIgTSMoUK1AXLczCS5Hh2h1TyykenlR8JW2cJLD7tzDTWsCIE2E
+  hiYuiaDgWobN/fIqpkcMFj48gi1daFhDUCTAHlmE
+  -----END RSA PRIVATE KEY-----'
+
 # attachment configuration
 attachment:
   thumb_path: '/static/attachment/thumbnail/'

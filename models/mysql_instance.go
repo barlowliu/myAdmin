@@ -1,35 +1,52 @@
 package models
 
-import (
-	"fmt"
-	"myAdmin/global"
-)
-
 type MysqlInstance struct {
-	GModel
-	Name          string                `json:"name" gorm:"type:varchar(30);comment:数据库昵称"`
-	Addr          string                `json:"addr" gorm:"comment:连接地址"`
-	Port          int                   `json:"port" gorm:"default:3306;comment:端口"`
-	AdminUser     string                `json:"admin_user" gorm:"comment:管理账号"`
-	AdminPassword string                `json:"admin_password" gorm:"comment:管理密码"`
-	MonitorUser   string                `json:"monitor_user" gorm:"comment:监控账号"`
-	MonitorPasswd string                `json:"monitor_passwd" gorm:"comment:监控密码"`
-	Version       uint                  `json:"version" gorm:"comment:数据库版本"`
-	Description   string                `json:"description" gorm:"comment:描述"`
-	State         uint                  `json:"state" gorm:"index;desc;comment:运行状态"`
-	Processlist   []Processlist         `gorm:"-"` //进程列表无需存入数据库
-	Gvariable     []MysqlGlobalVariable `gorm:"-"`
+	ID            int    `orm:"column(id);auto;size(11);description(主键ID)"" json:"id"`
+	Name          string `json:"name" orm:"description(数据库昵称)"`
+	Addr          string `json:"addr" orm:"description(连接地址)"`
+	Port          int    `json:"port" orm:"default(3306);description(数据库端口)"`
+	AdminUser     string `json:"admin_user" orm:"description(管理账号)"`
+	AdminPassword string `json:"admin_password" orm:"description(管理密码)"`
+	MonitorUser   string `json:"monitor_user" orm:"description(监控账号)"`
+	MonitorPasswd string `json:"monitor_passwd" orm:"description(监控密码)"`
+	Version       uint   `json:"version" orm:"description(数据库版本)"`
+	Description   string `json:"description" orm:"description(描述)"`
+	State         int    `json:"state" orm:"description(运行状态)"`
+	CreateTime    int    `orm:"column(create_time);size(10);default(0)" description:"操作时间" json:"create_time"`
+	UpdateTime    int    `orm:"column(update_time);size(10);default(0)" description:"更新时间" json:"update_time"`
+	DeleteTime    int    `orm:"column(delete_time);;size(10);default(0)" description:"删除时间" json:"delete_time"`
+	//Processlist   []Processlist         `orm:"-"` //进程列表无需存入数据库
+	//Gvariable     []MysqlGlobalVariable `orm:"-"`
 }
 
-func (i *MysqlInstance) GetOne() (err error) {
-	if i.ID > 0 {
-		return global.Db.First(&i, i.ID).Error
+// TableName 自定义table 名称
+func (*MysqlInstance) TableName() string {
+	return "mysql_instance"
+}
+
+// 多字段唯一键
+func (u *MysqlInstance) TableUnique() [][]string {
+	return [][]string{
+		[]string{"addr", "port"},
 	}
-	if len(i.Addr) > 0 {
-		return global.Db.Where("addr = ? AND port = ?", i.Addr, i.Port).First(&i).Error
-	}
-	if len(i.Name) > 0 {
-		return global.Db.Where("name = ?", i.Name).First(&i).Error
-	}
-	return fmt.Errorf("query parameter is empty")
+}
+
+// NoDeletionId 禁止删除的数据id
+func (*MysqlInstance) NoDeletionId() []int {
+	return []int{}
+}
+
+// SearchField 定义模型的可搜索字段
+func (*MysqlInstance) SearchField() []string {
+	return []string{"name", "addr"}
+}
+
+// WhereField 定义模型可作为条件的字段
+func (*MysqlInstance) WhereField() []string {
+	return []string{}
+}
+
+// TimeField 定义可做为时间范围查询的字段
+func (*MysqlInstance) TimeField() []string {
+	return []string{}
 }

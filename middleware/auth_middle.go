@@ -60,7 +60,7 @@ func AuthMiddle() {
 
 	}
 
-	beego.InsertFilter("/admin/*", beego.BeforeRouter, filterLogin)
+	beego.InsertFilter("/*", beego.BeforeRouter, filterLogin)
 }
 
 //判断是否是不需要验证登录的url,只针对admin模块路由的判断

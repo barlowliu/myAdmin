@@ -6,6 +6,8 @@ import (
 	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/core/logs"
 	"myAdmin/global"
+	"myAdmin/models"
+
 	// mysql driver
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -34,4 +36,7 @@ func init() {
 	if err != nil {
 		logs.Error("mysql register database error:", err)
 	}
+
+	orm.RegisterModel(new(models.MysqlInstance))
+	orm.RunSyncdb("default", false, true)
 }

@@ -2,7 +2,6 @@ package models
 
 import (
 	"gorm.io/gorm"
-	"myAdmin/global"
 	"time"
 )
 
@@ -14,10 +13,10 @@ type GModel struct {
 }
 
 func Migrate() {
-	global.Db.AutoMigrate(
-		&MysqlInstance{},
-		&MysqlUser{},
-		&MysqlDB{},
-		&MysqlGlobalVariable{},
-	)
+	//global.Db.AutoMigrate(
+	//	&MysqlInstance{},
+	//	&MysqlUser{},
+	//	&MysqlDB{},
+	//	&MysqlGlobalVariable{},
+	//)
 }

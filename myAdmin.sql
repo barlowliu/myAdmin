@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50730
  Source Host           : 10.1.2.189:3307
- Source Schema         : beego-admin
+ Source Schema         : myAdmin
 
  Target Server Type    : MySQL
  Target Server Version : 50730
