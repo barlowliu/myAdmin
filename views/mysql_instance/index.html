@@ -126,6 +126,10 @@
                             <td>{{$item.CreateTime | UnixTimeForFormat}}</td>
 
                             <td class="td-do">
+                                <a href="/mysql/instance/detail?id={{$item.ID}}"
+                                   class="btn btn-primary btn-xs" title="详情" data-toggle="tooltip">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
                                 <a href="/mysql/instance/edit?id={{$item.ID}}"
                                    class="btn btn-primary btn-xs" title="修改" data-toggle="tooltip">
                                     <i class="fa fa-pencil"></i>

@@ -12,103 +12,84 @@
                     </div>
                 </div>
                 <!-- 表单 -->
-                <form id="dataForm" class="form-horizontal dataForm" action="/admin/user/update" method="post"
+                <form id="dataForm" class="form-horizontal dataForm" action="/mysql/instance/update" method="post"
                       enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="{{.data.Id}}">
                     <!-- 表单字段区域 -->
+                    <input type="hidden" name="id" value="{{.data.ID}}">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="avatar" class="col-sm-2 control-label">头像</label>
+                            <label for="name" class="col-sm-2 control-label">数据库名</label>
                             <div class="col-sm-10 col-md-4">
-                                <input id="avatar" name="avatar" placeholder="请上传头像" data-initial-preview="{{.data.Avatar}}" type="file" class="form-control field-image" >
-                            </div>
-                        </div>
-                        <script>
-                            $('#avatar').fileinput({
-                                language: 'zh',
-                                overwriteInitial: true,
-                                browseLabel: '浏览',
-                                initialPreviewAsData: true,
-                                dropZoneEnabled: false,
-                                showUpload: false,
-                                showRemove: false,
-                                allowedFileTypes: ['image'],
-                                maxFileSize: 10240,
-                            });
-                        </script>
-                        <div class="form-group">
-                            <label for="user_level_id" class="col-sm-2 control-label">用户等级</label>
-                            <div class="col-sm-10 col-md-4">
-                                <select name="user_level_id" id="user_level_id" class="form-control field-select"
-                                        data-placeholder="请选择用户等级">
-                                    <option value=""></option>
-                                    {{range $key,$item := .user_level_list}}
-                                    <option value="{{$item.Id}}" {{if compare $.data.UserLevelId $item.Id}}selected {{end}}>
-                                        {{$item.Name}}
-                                    </option>
-                                    {{end}}
-                                </select>
-                            </div>
-                        </div>
-                        <script>
-                            $('#user_level_id').select2();
-                        </script>
-                        <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label">用户名</label>
-                            <div class="col-sm-10 col-md-4">
-                                <input id="username" name="username" value="{{.data.Username}}"
-                                       placeholder="请输入用户名" type="text" class="form-control field-text">
+                                <input id="name" name="name" value="{{.data.Name}}"
+                                       placeholder="请输入数据库名" type="text" class="form-control field-text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="mobile" class="col-sm-2 control-label">手机号</label>
+                            <label for="addr" class="col-sm-2 control-label">连接地址</label>
                             <div class="col-sm-10 col-md-4">
-                                <input id="mobile" name="mobile" value="{{.data.Mobile}}" placeholder="请输入手机号"
+                                <input id="addr" name="addr" value="{{.data.Addr}}" placeholder="请输入数据库连接地址"
                                        type="tel" maxlength="11" class="form-control field-mobile">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nickname" class="col-sm-2 control-label">昵称</label>
+                            <label for="port" class="col-sm-2 control-label">连接端口</label>
                             <div class="col-sm-10 col-md-4">
-                                <input id="nickname" name="nickname" value="{{.data.Nickname}}"
-                                       placeholder="请输入昵称" type="text" class="form-control field-text">
+                                <input id="port" name="port" value="{{.data.Port}}"
+                                       placeholder="请输入数据库端口" type="text" class="form-control field-text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin_user" class="col-sm-2 control-label">管理用户</label>
+                            <div class="col-sm-10 col-md-4">
+                                <input id="admin_user" name="admin_user" value="{{.data.AdminUser}}"
+                                       placeholder="请输入数据库管理账号，建议使用root" type="text" class="form-control field-text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin_password" class="col-sm-2 control-label">管理密码</label>
+                            <div class="col-sm-10 col-md-4">
+                                <input id="admin_password" name="admin_password"
+                                       value="{{.data.AdminPassword}}"
+                                       placeholder="请输入管理账号密码" type="password" class="form-control field-password">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-sm-2 control-label">密码</label>
+                            <label for="monitor_user" class="col-sm-2 control-label">监控用户</label>
                             <div class="col-sm-10 col-md-4">
-                                <input id="password" name="password"
-                                       value="{{.data.Password}}"
-                                       placeholder="请输入密码" type="password" class="form-control field-password">
+                                <input id="monitor_user" name="monitor_user" value="{{.data.MonitorUser}}"
+                                       placeholder="请输入数据库监控账号" type="text" class="form-control field-text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="monitor_password" class="col-sm-2 control-label">监控密码</label>
+                            <div class="col-sm-10 col-md-4">
+                                <input id="monitor_password" name="monitor_password"
+                                       value="{{.data.MonitorPassword}}"
+                                       placeholder="请输入监控账号密码" type="password" class="form-control field-password">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="img" class="col-sm-2 control-label">描述</label>
-                            <div class="col-sm-10 col-md-10">
-                                <script id="description" name="description" type="text/plain">{{str2html .data.Description}}
-                                </script>
+                            <label for="description" class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-10 col-md-4">
+                                <input id="description" name="description"
+                                       value="{{.data.Description}}"
+                                       placeholder="数据库描述" type="text" class="form-control field-password">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="state" class="col-sm-2 control-label">是否启用</label>
+                            <div class="col-sm-10 col-md-4">
+                                <input class="input-switch" id="state" value="{{.data.State}}" checked type="checkbox"/>
+                                <input class="switch field-switch" placeholder="是否启用" name="state"
+                                       value="1" hidden/>
+                            </div>
+                        </div>
+
                         <script>
-                            UE.delEditor('description');
-                            var description = UE.getEditor('description', {
-                                serverUrl: UEServer
-                            });
-                        </script>
-
-                        <div class="form-group">
-                            <label for="status" class="col-sm-2 control-label">是否启用</label>
-                            <div class="col-sm-10 col-md-4">
-                                <input class="input-switch" id="status" value="1" {{if eq 1 .data.Status}}checked {{end}} type="checkbox"/>
-                                <input class="switch field-switch" placeholder="是否启用" name="status"
-                                       value="{{.data.Status}}" hidden/>
-                            </div>
-                        </div>
-
-                        <script>
-                            $('#status').bootstrapSwitch({
+                            $('#state').bootstrapSwitch({
                                 onText: "是",
                                 offText: "否",
                                 onColor: "success",
@@ -145,46 +126,45 @@
     /** 表单验证 **/
     $('#dataForm').validate({
         rules: {
-            'user_level_id': {
+            'name': {
                 required: true,
             },
-            'username': {
+            'addr': {
                 required: true,
             },
-            'mobile': {
+            'port': {
                 required: true,
             },
-            'nickname': {
+            'admin_user': {
                 required: true,
             },
-            'password': {
+            'admin_password': {
                 required: true,
             },
-            'status': {
+            'state': {
                 required: true,
             },
 
         },
         messages: {
-            'user_level_id': {
-                required: "用户等级不能为空",
+            'name': {
+                required: "数据库名不能为空",
             },
-            'username': {
-                required: "用户名不能为空",
+            'addr': {
+                required: "数据库连接地址不能为空",
             },
-            'mobile': {
-                required: "手机号不能为空",
+            'port': {
+                required: "数据库端口不能为空",
             },
-            'nickname': {
-                required: "昵称不能为空",
+            'admin_user': {
+                required: "管理账号不能为空",
             },
-            'password': {
-                required: "密码不能为空",
+            'admin_password': {
+                required: "管理密码不能为空",
             },
-            'status': {
+            'state': {
                 required: "是否启用不能为空",
             },
-
         }
     });
 </script>
